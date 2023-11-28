@@ -1,4 +1,3 @@
-
 const button = document.querySelector('#button-1');
 const inputValue = document.getElementById('sem1')
 let allGrades = document.querySelector('#allGrades')
@@ -7,6 +6,13 @@ let allGrades = document.querySelector('#allGrades')
 const redSVG = document.querySelector('#redSVG').content.querySelector("svg")
 const orangeSVG = document.querySelector('#orangeSVG').content.querySelector("svg")
 const greenSVG = document.querySelector('#greenSVG').content.querySelector("svg")
+
+//add 1 on the number of semester
+function addSemesterNumber() {
+    let semesterNumber = 1;
+    semesterNumber++;
+    document.querySelector('#semesterNumber').textContent = "Semestre " + semesterNumber;
+}
 
 
 // add grade to the list
@@ -30,14 +36,20 @@ button.addEventListener('click', () => {
 
     newValue.appendChild(circle)
     newValue.appendChild(document.createTextNode(inputValue.value))
-    console.log(circle)
-
 
     if (allGrades && inputValue.value >= 1 && inputValue.value <= 6) {
         allGrades.appendChild(newValue)
     }
 })
 
+const buttonSemester = document.querySelector('#button-semester');
+buttonSemester.addEventListener('click', () => {
+    const newSemester = document.createElement('div')
+    newSemester.className = "px-4 py-6 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-0"
+    newSemester.textContent = addSemesterNumber();
 
 
+    console.log(newSemester)
+    newSemester.appendChild(document.createTextNode(newSemester.textContent))
+})
 
