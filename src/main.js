@@ -1,22 +1,22 @@
 const button = document.querySelector('#button-1');
-const inputValue = document.getElementById('sem1')
-let allGrades = document.querySelector('#allGrades')
+const buttonSemester = document.querySelector('#button-semester');
 
-//all the color for the circles before the grade
-const redSVG = document.querySelector('#redSVG').content.querySelector("svg")
-const orangeSVG = document.querySelector('#orangeSVG').content.querySelector("svg")
-const greenSVG = document.querySelector('#greenSVG').content.querySelector("svg")
 
 //add 1 on the number of semester
-function addSemesterNumber() {
     let semesterNumber = 1;
-    semesterNumber++;
-    document.querySelector('#semesterNumber').textContent = "Semestre " + semesterNumber;
-}
 
 
 // add grade to the list
 button.addEventListener('click', () => {
+    const inputValue = document.getElementById('sem1')
+    let allGrades = document.querySelector('#allGrades')
+
+    //all the color for the circles before the grade
+    const redSVG = document.querySelector('#redSVG').content.querySelector("svg")
+    const orangeSVG = document.querySelector('#orangeSVG').content.querySelector("svg")
+    const greenSVG = document.querySelector('#greenSVG').content.querySelector("svg")
+
+
     //take the number in input
     const newValue = document.createElement('span');
     newValue.className = "inline-flex items-center gap-x-1.5 rounded-md px-2 py-2 text-sm font-medium text-gray-900 ring-1 ring-inset ring-gray-200"
@@ -42,14 +42,28 @@ button.addEventListener('click', () => {
     }
 })
 
-const buttonSemester = document.querySelector('#button-semester');
+//average calculator
+
+//border color change when input is focused
+button.addEventListener('focus', () => {
+
+})
+
 buttonSemester.addEventListener('click', () => {
     const newSemester = document.createElement('div')
     newSemester.className = "px-4 py-6 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-0"
-    newSemester.textContent = addSemesterNumber();
+    semesterNumber++;
+    newSemester.textContent = "Semester " + semesterNumber;
+    const semesterPlacement = document.querySelector('#semesterClass')
 
 
     console.log(newSemester)
-    newSemester.appendChild(document.createTextNode(newSemester.textContent))
+    semesterPlacement.appendChild(newSemester)
 })
+
+
+
+
+
+
 
