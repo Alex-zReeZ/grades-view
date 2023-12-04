@@ -18,11 +18,10 @@ buttonSemester.addEventListener('click', () => {
     if (semesterNumber <= 7) {
         //add 1 on the number of semester
         semesterNumber++;
-    } else if (semesterNumber > 7 ) {
+    } else if (semesterNumber > 7) {
         //remove button if 8 semester
         buttonSemester.remove();
     }
-
 
 
     /*****************************add a grades to the semester**********************/
@@ -39,30 +38,51 @@ buttonSemester.addEventListener('click', () => {
         const greenSVG = document.querySelector('#greenSVG').content.querySelector("svg")
 
         //take the number in input
-        const newValue = document.createElement('span');
-        newValue.className =
-            "inline-flex items-center gap-x-1.5 rounded-md px-2 py-2 text-sm font-medium text-gray-900 ring-1 ring-inset ring-gray-200"
-            //what color goes before the grade
+        /*        const newValue = document.createElement('span');
+                newValue.className =
+                    "inline-flex items-center gap-x-1.5 rounded-md px-2 py-2 text-sm font-medium text-gray-900 ring-1 ring-inset ring-gray-200"
+                    //what color goes before the grade
 
-        let circle = document.createElement('svg');
+                let circle = document.createElement('svg');
 
-        if (inputValue.value < 4 && inputValue.value >= 1) {
-            circle = redSVG.cloneNode(true)
-        }
-        else if (inputValue.value > 4 && inputValue.value <= 6) {
-            circle = greenSVG.cloneNode(true)
-        }
-        else if (inputValue.value === 4 + ""){
-            circle = orangeSVG.cloneNode(true)
-        }
+                if (inputValue.value < 4 && inputValue.value >= 1) {
+                    circle = redSVG.cloneNode(true)
+                }
+                else if (inputValue.value > 4 && inputValue.value <= 6) {
+                    circle = greenSVG.cloneNode(true)
+                }
+                else if (inputValue.value === 4 + ""){
+                    circle = orangeSVG.cloneNode(true)
+                }
 
-        newValue.appendChild(circle)
-        newValue.appendChild(document.createTextNode(inputValue.value))
+                newValue.appendChild(circle)
+                newValue.appendChild(document.createTextNode(inputValue.value))
 
 
 
-        if (gradesList) {
-            gradesList.appendChild(newValue)
+                if (gradesList) {
+                    gradesList.appendChild(newValue)
+                }*/
+        if (inputValue.value <= 6 && inputValue.value % 0.5 === 0 && inputValue.value > 0.5) {
+            const newValue = document.createElement("span");
+            newValue.className =
+                "inline-flex items-center gap-x-1.5 rounded-md px-2 py-2 text-sm font-medium text-gray-900 ring-1 ring-inset ring-gray-200";
+
+            let newSvg = document.createElement("svg");
+
+            if (inputValue.value > 4) {
+                newSvg = greenSVG.cloneNode(true);
+            } else if (inputValue.value < 4) {
+                newSvg = redSVG.cloneNode(true);
+            } else {
+                newSvg = orangeSVG.cloneNode(true);
+            }
+            newValue.appendChild(newSvg);
+            newValue.appendChild(document.createTextNode(inputValue.value));
+
+            if (gradesList) {
+                gradesList.appendChild(newValue);
+            }
         }
     })
 })
