@@ -8,6 +8,7 @@ let semesterNumber = 1;
 /******************************add a semester **********************************/
 buttonSemester.addEventListener('click', () => {
     let allGrades = [];
+    let allOfAverage = [];
     const newSemester = document.querySelector('#semester-template').content.cloneNode(true);
     const semesterPlacement = document.querySelector('#semesterGrid');
     semesterPlacement.appendChild(newSemester)
@@ -26,12 +27,10 @@ buttonSemester.addEventListener('click', () => {
         buttonSemester.remove();
     }
 
-
     /*****************************add a grades to the semester**********************/
     const button = Semester.querySelector('button');
     const inputValue = Semester.querySelector('input')
     const gradesList = Semester.querySelector('dd').querySelector("div")
-
 
     button.addEventListener('click', () => {
         //take the number in input
@@ -89,17 +88,48 @@ buttonSemester.addEventListener('click', () => {
             } else if (average === 4) {
                 averagebig = orangeSVG.cloneNode(true);
             }
+
+            allOfAverage.push(parseFloat(average.value))
     
             rightAverageElement.appendChild(averagebig);
         }
 
         rightAverageElement.appendChild(document.createTextNode(average));
+
+        /*********************************average of average ************************************/
+        const averageOfAverage = Document.querySelector('#averageOfAverage')
+
+        let sum2 = 0;
+        for (const average2 of allOfAverage) {
+            sum2 += average2
+        }
+
+        let average3 = sum / allOfAverage.length;
+        average3 = Math.round(average3 * 2)/2;
+
+        let average4 = document.createElement('svg')
+
+        if (average4 <= 6 && average4 % 0.5 === 0 && average4 > 0.5) {
+            if (average4 > 4) {
+                averagebig = greenSVG.cloneNode(true);
+            } else if (average4 < 4) {
+                averagebig = redSVG.cloneNode(true);
+            } else if (average4 === 4) {
+                averagebig = orangeSVG.cloneNode(true);
+            }
+        averageOfAverage.appendChild(average4)
+        }
+        
     });
+
+
+
     
     /************************************** Hover when focus *****************************/
     const borderButtonColor = Semester.querySelector('#borderColorButton')
     const uploadSvg = Semester.querySelector('svg');
 
+    // change the border and the svg color to blue when input in focused
     inputValue.addEventListener("focus", (event) => {
         // change the svg to blue when input focused
         uploadSvg.classList.remove("text-gray-400");
@@ -110,6 +140,7 @@ buttonSemester.addEventListener('click', () => {
         borderButtonColor.classList.add("ring-blue-300")
     });
     
+    // change the border and the svg color back to blue when input focus is loosed
     inputValue.addEventListener("blur", function() {
         // change the svg back to gray when input focused
         uploadSvg.classList.remove("text-blue-400");
@@ -119,7 +150,6 @@ buttonSemester.addEventListener('click', () => {
         borderButtonColor.classList.remove("ring-blue-300")
         borderButtonColor.classList.add("ring-gray-300")
     });
-    
 
 
 });
