@@ -3,16 +3,12 @@ const redSVG = document.querySelector('#redSVG').content.querySelector("svg")
 const orangeSVG = document.querySelector('#orangeSVG').content.querySelector("svg")
 const greenSVG = document.querySelector('#greenSVG').content.querySelector("svg")
 
-
 let semesterNumber = 1;
 
 /******************************add a semester **********************************/
 buttonSemester.addEventListener('click', () => {
     let allGrades = [];
-
-
-
-    /*const newSemester = document.querySelector('#semester-template').content.cloneNode(true);
+    const newSemester = document.querySelector('#semester-template').content.cloneNode(true);
     const semesterPlacement = document.querySelector('#semesterGrid');
     semesterPlacement.appendChild(newSemester)
 
@@ -30,7 +26,7 @@ buttonSemester.addEventListener('click', () => {
         buttonSemester.remove();
     }
 
-*/
+
     /*****************************add a grades to the semester**********************/
     const button = Semester.querySelector('button');
     const inputValue = Semester.querySelector('input')
@@ -44,17 +40,19 @@ buttonSemester.addEventListener('click', () => {
             newValue.className =
                 "inline-flex items-center gap-x-1.5 rounded-md px-2 py-2 text-sm font-medium text-gray-900 ring-1 ring-inset ring-gray-200";
 
-            let newSvg = document.createElement("svg");
+            let circle = document.createElement("svg");
 
             if (inputValue.value > 4) {
-                newSvg = greenSVG.cloneNode(true);
+                circle = greenSVG.cloneNode(true);
             } else if (inputValue.value < 4) {
-                newSvg = redSVG.cloneNode(true);
+                circle = redSVG.cloneNode(true);
             } else {
-                newSvg = orangeSVG.cloneNode(true);
+                circle = orangeSVG.cloneNode(true);
             }
-            newValue.appendChild(newSvg);
+
+            newValue.appendChild(circle);
             newValue.appendChild(document.createTextNode(inputValue.value));
+            allGrades.push(parseFloat(inputValue.value))
 
             if (gradesList) {
                 gradesList.appendChild(newValue);
@@ -63,30 +61,32 @@ buttonSemester.addEventListener('click', () => {
     })
 
     /************************************** show the average *********************************/
-    document.addEventListener('DOMContentLoaded', function () {
-        const divElements = document.querySelectorAll('#rightAverage');
+    document.addEventListener('click', function () {
+        const rightAverageElement = document.querySelector('#rightAverage');
+
         let sum = 0;
+        for (const Grades of allGrades) {
+            sum += Grades
+        }
+        rightAverageElement.innerHTML = sum/ allGrades.length;
 
-        divElements.forEach(div => {
-            const gradeValue = parseFloat(div.textContent);
-            sum += gradeValue;
+        let averagebig = rightAverageElement.createElement("svg");
+        if (rightAverageElement <= 6 && rightAverageElement % 0.5 === 0 && rightAverageElement > 0.5) {
 
-
-            if (gradeValue <= 6 && gradeValue % 0.5 === 0 && gradeValue > 0.5) {
-                let averageSvg;
-
-                if (gradeValue > 4) {
-                    averageSvg = greenSVG.cloneNode(true);
-                } else if (gradeValue < 4) {
-                    averageSvg = redSVG.cloneNode(true);
-                } else {
-                    averageSvg = orangeSVG.cloneNode(true);
+            if (rightAverageElement.value > 4) {
+                averagebig = greenSVG.cloneNode(true);
+            } else if (rightAverageElement.value < 4) {
+                averagebig = redSVG.cloneNode(true);
+            } else {
+                averagebig = orangeSVG.cloneNode(true);
                 }
-
             }
-        });
+            rightAverageElement.appendChild(averagebig)
+
     });
-})
+
+});
+
 /************************************** Hover when focus *****************************/
 /*
 button.addEventListener('focus', () => {
