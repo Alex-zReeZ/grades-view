@@ -8,7 +8,11 @@ let semesterNumber = 1;
 
 /******************************add a semester **********************************/
 buttonSemester.addEventListener('click', () => {
-    const newSemester = document.querySelector('#semester-template').content.cloneNode(true);
+    let allGrades = [];
+
+
+
+    /*const newSemester = document.querySelector('#semester-template').content.cloneNode(true);
     const semesterPlacement = document.querySelector('#semesterGrid');
     semesterPlacement.appendChild(newSemester)
 
@@ -26,7 +30,7 @@ buttonSemester.addEventListener('click', () => {
         buttonSemester.remove();
     }
 
-
+*/
     /*****************************add a grades to the semester**********************/
     const button = Semester.querySelector('button');
     const inputValue = Semester.querySelector('input')
@@ -57,6 +61,8 @@ buttonSemester.addEventListener('click', () => {
             }
         }
     })
+
+    /************************************** show the average *********************************/
     document.addEventListener('DOMContentLoaded', function () {
         const divElements = document.querySelectorAll('#rightAverage');
         let sum = 0;
@@ -64,6 +70,7 @@ buttonSemester.addEventListener('click', () => {
         divElements.forEach(div => {
             const gradeValue = parseFloat(div.textContent);
             sum += gradeValue;
+
 
             if (gradeValue <= 6 && gradeValue % 0.5 === 0 && gradeValue > 0.5) {
                 let averageSvg;
@@ -75,11 +82,10 @@ buttonSemester.addEventListener('click', () => {
                 } else {
                     averageSvg = orangeSVG.cloneNode(true);
                 }
+
             }
-            divElements.innerText
         });
     });
-
 })
 /************************************** Hover when focus *****************************/
 /*
@@ -87,10 +93,3 @@ button.addEventListener('focus', () => {
     const border = document.querySelector('#input');
 })
 */
-
-
-
-
-
-
-
