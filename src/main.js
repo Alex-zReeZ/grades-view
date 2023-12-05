@@ -61,29 +61,34 @@ buttonSemester.addEventListener('click', () => {
     })
 
     /************************************** show the average *********************************/
-    document.addEventListener('click', function () {
+    button.addEventListener('click', function () {
         const rightAverageElement = document.querySelector('#rightAverage');
-
+    
         let sum = 0;
-        for (const Grades of allGrades) {
-            sum += Grades
+        for (const grade of allGrades) {
+            sum += grade;
         }
-        rightAverageElement.innerHTML = sum/ allGrades.length;
-
-        let averagebig = rightAverageElement.createElement("svg");
-        if (rightAverageElement <= 6 && rightAverageElement % 0.5 === 0 && rightAverageElement > 0.5) {
-
-            if (rightAverageElement.value > 4) {
+        let average = sum / allGrades.length;
+        average = Math.round(average*2)/2;
+        rightAverageElement.innerHTML = ''; // Clear previous content
+    
+        let averagebig = document.createElement('svg');
+    
+        if (average <= 6 && average % 0.5 === 0 && average > 0.5) {
+            if (average > 4) {
                 averagebig = greenSVG.cloneNode(true);
-            } else if (rightAverageElement.value < 4) {
+            } else if (average < 4) {
                 averagebig = redSVG.cloneNode(true);
-            } else {
+            } else if (average === 4) {
                 averagebig = orangeSVG.cloneNode(true);
-                }
             }
-            rightAverageElement.appendChild(averagebig)
-
+    
+            rightAverageElement.appendChild(averagebig);
+        }
+    
+        rightAverageElement.appendChild(document.createTextNode(average));
     });
+    
 
 });
 
