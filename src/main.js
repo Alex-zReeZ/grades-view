@@ -96,12 +96,31 @@ buttonSemester.addEventListener('click', () => {
         rightAverageElement.appendChild(document.createTextNode(average));
     });
     
+    /************************************** Hover when focus *****************************/
+    const borderButtonColor = Semester.querySelector('#borderColorButton')
+    const uploadSvg = Semester.querySelector('svg');
+
+    inputValue.addEventListener("focus", (event) => {
+        // change the svg to blue when input focused
+        uploadSvg.classList.remove("text-gray-400");
+        uploadSvg.classList.add("text-blue-400");   
+        
+        // change the button border to blue when input focused
+        borderButtonColor.classList.remove("ring-gray-300")
+        borderButtonColor.classList.add("ring-blue-300")
+    });
+    
+    inputValue.addEventListener("blur", function() {
+        // change the svg back to gray when input focused
+        uploadSvg.classList.remove("text-blue-400");
+        uploadSvg.classList.add("text-gray-400");   
+        
+        // change the button border back to gray when input isn't focus
+        borderButtonColor.classList.remove("ring-blue-300")
+        borderButtonColor.classList.add("ring-gray-300")
+    });
+    
+
 
 });
 
-/************************************** Hover when focus *****************************/
-/*
-button.addEventListener('focus', () => {
-    const border = document.querySelector('#input');
-})
-*/
