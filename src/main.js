@@ -62,17 +62,24 @@ buttonSemester.addEventListener('click', () => {
 
     /************************************** show the average *********************************/
     button.addEventListener('click', function () {
-        const rightAverageElement = document.querySelector('#rightAverage');
+        const rightAverageElement = Semester.querySelector('.rightAverage');
     
+        // adds up every number in grade array
         let sum = 0;
         for (const grade of allGrades) {
             sum += grade;
         }
+
+        // round the average to X.0 and X.5 
         let average = sum / allGrades.length;
         average = Math.round(average*2)/2;
-        rightAverageElement.innerHTML = ''; // Clear previous content
+        // Clear previous content
+        rightAverageElement.innerHTML = ''; 
     
+        // create svg for average color
         let averagebig = document.createElement('svg');
+    
+        //verify wich color to show to average
     
         if (average <= 6 && average % 0.5 === 0 && average > 0.5) {
             if (average > 4) {
@@ -85,7 +92,7 @@ buttonSemester.addEventListener('click', () => {
     
             rightAverageElement.appendChild(averagebig);
         }
-    
+
         rightAverageElement.appendChild(document.createTextNode(average));
     });
     
