@@ -3,12 +3,12 @@ const redSVG = document.querySelector('#redSVG').content.querySelector("svg")
 const orangeSVG = document.querySelector('#orangeSVG').content.querySelector("svg")
 const greenSVG = document.querySelector('#greenSVG').content.querySelector("svg")
 
+let allOfAverage = [];
 let semesterNumber = 1;
 
 /******************************add a semester **********************************/
 buttonSemester.addEventListener('click', () => {
     let allGrades = [];
-    let allOfAverage = [];
     const newSemester = document.querySelector('#semester-template').content.cloneNode(true);
     const semesterPlacement = document.querySelector('#semesterGrid');
     semesterPlacement.appendChild(newSemester)
@@ -69,57 +69,62 @@ buttonSemester.addEventListener('click', () => {
             sum += grade;
         }
 
-        // round the average to X.0 and X.5 
+        // round the average to X.0 (X) and X.5 
         let average = sum / allGrades.length;
         average = Math.round(average*2)/2;
         // Clear previous content
         rightAverageElement.innerHTML = ''; 
     
         // create svg for average color
-        let averagebig = document.createElement('svg');
+        let semesterAverage = document.createElement('svg');
     
         //verify wich color to show to average
     
         if (average <= 6 && average % 0.5 === 0 && average > 0.5) {
             if (average > 4) {
-                averagebig = greenSVG.cloneNode(true);
+                semesterAverage = greenSVG.cloneNode(true);
             } else if (average < 4) {
-                averagebig = redSVG.cloneNode(true);
+                semesterAverage = redSVG.cloneNode(true);
             } else if (average === 4) {
-                averagebig = orangeSVG.cloneNode(true);
+                semesterAverage = orangeSVG.cloneNode(true);
             }
-
-            allOfAverage.push(parseFloat(average.value))
-    
-            rightAverageElement.appendChild(averagebig);
+        allOfAverage.push(average)
+/*         console.log(allOfAverage)
+ */    
+        rightAverageElement.appendChild(semesterAverage);
         }
+        console.log(average)
 
         rightAverageElement.appendChild(document.createTextNode(average));
 
         /*********************************average of average ************************************/
-        const averageOfAverage = Document.querySelector('#averageOfAverage')
+        const averageOfAverage = document.querySelector('.averageOfAverage');
 
         let sum2 = 0;
         for (const average2 of allOfAverage) {
-            sum2 += average2
+            sum2 += average2;
         }
-
-        let average3 = sum / allOfAverage.length;
-        average3 = Math.round(average3 * 2)/2;
-
-        let average4 = document.createElement('svg')
-
-        if (average4 <= 6 && average4 % 0.5 === 0 && average4 > 0.5) {
-            if (average4 > 4) {
-                averagebig = greenSVG.cloneNode(true);
-            } else if (average4 < 4) {
-                averagebig = redSVG.cloneNode(true);
-            } else if (average4 === 4) {
-                averagebig = orangeSVG.cloneNode(true);
+    
+        let average3 = sum2 / allOfAverage.length;
+        average3 = Math.round(average3 * 2) / 2;
+    
+        let average4 = document.createElement('svg');
+    
+        if (average3 <= 6 && average3 % 0.5 === 0 && average3 > 0.5) {
+            if (average3 > 4) {
+                average4 = greenSVG.cloneNode(true);
+            } else if (average3 < 4) {
+                average4 = redSVG.cloneNode(true);
+            } else if (average3 === 4) {
+                average4 = orangeSVG.cloneNode(true);
             }
-        averageOfAverage.appendChild(average4)
+
+        // Clear previous average of averages
+        averageOfAverage.innerHTML = ''; 
+        averageOfAverage.appendChild(average4);
         }
-        
+        averageOfAverage.appendChild(document.createTextNode(average3));
+
     });
 
 
@@ -130,7 +135,7 @@ buttonSemester.addEventListener('click', () => {
     const uploadSvg = Semester.querySelector('svg');
 
     // change the border and the svg color to blue when input in focused
-    inputValue.addEventListener("focus", (event) => {
+    inputValue.addEventListener("focus", () => {
         // change the svg to blue when input focused
         uploadSvg.classList.remove("text-gray-400");
         uploadSvg.classList.add("text-blue-400");   
