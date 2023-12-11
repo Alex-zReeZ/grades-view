@@ -3,12 +3,14 @@ const redSVG = document.querySelector('#redSVG').content.querySelector("svg")
 const orangeSVG = document.querySelector('#orangeSVG').content.querySelector("svg")
 const greenSVG = document.querySelector('#greenSVG').content.querySelector("svg")
 
-let allOfAverage = [];
+let allOfArrayGrade = [];
 let semesterNumber = 1;
 
 /******************************add a semester **********************************/
 buttonSemester.addEventListener('click', () => {
     let allGrades = [];
+    let allOfAverage = [];
+
     const newSemester = document.querySelector('#semester-template').content.cloneNode(true);
     const semesterPlacement = document.querySelector('#semesterGrid');
     semesterPlacement.appendChild(newSemester)
@@ -88,25 +90,33 @@ buttonSemester.addEventListener('click', () => {
             } else if (average === 4) {
                 semesterAverage = orangeSVG.cloneNode(true);
             }
+
         allOfAverage.push(average)
-/*         console.log(allOfAverage)
- */    
+        allOfArrayGrade.push(allOfAverage)
+        console.log(allOfArrayGrade)
+  
         rightAverageElement.appendChild(semesterAverage);
         }
-        console.log(average)
-
         rightAverageElement.appendChild(document.createTextNode(average));
 
-        /*********************************average of average ************************************/
-        const averageOfAverage = document.querySelector('.averageOfAverage');
+        /********************************* average of average ************************************/
+            const averageOfAverage = document.querySelector('.averageOfAverage');
+        
+            let sum2 = 0;
 
-        let sum2 = 0;
-        for (const average2 of allOfAverage) {
-            sum2 += average2;
-        }
-    
-        let average3 = sum2 / allOfAverage.length;
-        average3 = Math.round(average3 * 2) / 2;
+            // Parcourir chaque tableau dans allOfArrayGrade 
+            for (let i = 0; i < allOfArrayGrade.length; i++) {
+            let currentSemesterGrades = allOfArrayGrade[i];
+
+                // Add semester average to make the global average 
+                for (let j = 0; j < currentSemesterGrades.length; j++) {
+                    sum2 += currentSemesterGrades[j];
+                }
+            }
+
+
+            let average3 = sum2 / allOfArrayGrade.length; // Utilisation de flat() pour aplatir les tableaux imbriqués
+            average3 = Math.round(average3 * 2) / 2;
     
         let average4 = document.createElement('svg');
     
@@ -146,7 +156,7 @@ buttonSemester.addEventListener('click', () => {
     });
     
     // change the border and the svg color back to blue when input focus is loosed
-    inputValue.addEventListener("blur", function() {
+    inputValue.addEventListner("blur", function() {
         // change the svg back to gray when input focused
         uploadSvg.classList.remove("text-blue-400");
         uploadSvg.classList.add("text-gray-400");   
