@@ -90,34 +90,39 @@ buttonSemester.addEventListener('click', () => {
             } else if (average === 4) {
                 semesterAverage = orangeSVG.cloneNode(true);
             }
+            // delete the old average    
+            allOfAverage.pop([0])
 
-        allOfAverage.push(average)
-        allOfArrayGrade.push(allOfAverage)
-        console.log(allOfArrayGrade)
-  
-        rightAverageElement.appendChild(semesterAverage);
+            // push the new average    
+            allOfAverage.push(average)
+            
+            // push the new average, to later make the average
+            allOfArrayGrade.push(allOfAverage)
+            console.log(allOfArrayGrade)
+            
+            rightAverageElement.appendChild(semesterAverage);
         }
         rightAverageElement.appendChild(document.createTextNode(average));
 
         /********************************* average of average ************************************/
-            const averageOfAverage = document.querySelector('.averageOfAverage');
+        const averageOfAverage = document.querySelector('.averageOfAverage');
         
-            let sum2 = 0;
+        let sum2 = 0;
 
-            // Parcourir chaque tableau dans allOfArrayGrade 
-            for (let i = 0; i < allOfArrayGrade.length; i++) {
-            let currentSemesterGrades = allOfArrayGrade[i];
+        // Parcourir chaque tableau dans allOfArrayGrade 
+        for (let i = 0; i < allOfArrayGrade.length; i++) {
+        let currentSemesterGrades = allOfArrayGrade[i];
 
-                // Add semester average to make the global average 
-                for (let j = 0; j < currentSemesterGrades.length; j++) {
-                    sum2 += currentSemesterGrades[j];
-                }
+            // Add semester average to make the global average 
+            for (let j = 0; j < currentSemesterGrades.length; j++) {
+                sum2 += currentSemesterGrades[j];
             }
+        }
 
 
-            let average3 = sum2 / allOfArrayGrade.length; // Utilisation de flat() pour aplatir les tableaux imbriqués
-            average3 = Math.round(average3 * 2) / 2;
-    
+        let average3 = sum2 / allOfArrayGrade.length; 
+        average3 = Math.round(average3 * 2) / 2;
+                                                                         
         let average4 = document.createElement('svg');
     
         if (average3 <= 6 && average3 % 0.5 === 0 && average3 > 0.5) {
@@ -129,12 +134,11 @@ buttonSemester.addEventListener('click', () => {
                 average4 = orangeSVG.cloneNode(true);
             }
 
-        // Clear previous average of averages
-        averageOfAverage.innerHTML = ''; 
-        averageOfAverage.appendChild(average4);
+            // Clear previous average of averages
+            averageOfAverage.innerHTML = ''; 
+            averageOfAverage.appendChild(average4);
         }
         averageOfAverage.appendChild(document.createTextNode(average3));
-
     });
 
 
@@ -156,7 +160,7 @@ buttonSemester.addEventListener('click', () => {
     });
     
     // change the border and the svg color back to blue when input focus is loosed
-    inputValue.addEventListner("blur", function() {
+    inputValue.addEventListener("blur", function() {
         // change the svg back to gray when input focused
         uploadSvg.classList.remove("text-blue-400");
         uploadSvg.classList.add("text-gray-400");   
