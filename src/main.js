@@ -3,13 +3,16 @@ const redSVG = document.querySelector('#redSVG').content.querySelector("svg")
 const orangeSVG = document.querySelector('#orangeSVG').content.querySelector("svg")
 const greenSVG = document.querySelector('#greenSVG').content.querySelector("svg")
 
-let allOfArrayGrade = [];
+const allOfArrayGrade = [];
 let semesterNumber = 1;
+
 
 /******************************add a semester **********************************/
 buttonSemester.addEventListener('click', () => {
     let allGrades = [];
-    let allOfAverage = [];
+    let allOfAverage = 0;
+    let currrentemesterNumber = semesterNumber
+    allOfArrayGrade.push(0);
 
     const newSemester = document.querySelector('#semester-template').content.cloneNode(true);
     const semesterPlacement = document.querySelector('#semesterGrid');
@@ -28,13 +31,18 @@ buttonSemester.addEventListener('click', () => {
         //remove button if 8 semester
         buttonSemester.remove();
     }
-
+/* 
+tout_les_semestres = [4,0]
+tout_les_semestres[numero_de_semestre-1] = 3
+tout_les_semestres = [4,3]
+ */
     /*****************************add a grades to the semester**********************/
     const button = Semester.querySelector('button');
     const inputValue = Semester.querySelector('input')
     const gradesList = Semester.querySelector('dd').querySelector("div")
 
     button.addEventListener('click', () => {
+        
         //take the number in input
         if (inputValue.value <= 6 && inputValue.value % 0.5 === 0 && inputValue.value > 0.5) {
             const newValue = document.createElement("span");
@@ -90,18 +98,14 @@ buttonSemester.addEventListener('click', () => {
             } else if (average === 4) {
                 semesterAverage = orangeSVG.cloneNode(true);
             }
-            // delete the old average    
-            allOfAverage.pop([0])
 
-            // push the new average    
-            allOfAverage.push(average)
-            
-            // push the new average, to later make the average
-            allOfArrayGrade.push(allOfAverage)
-            console.log(allOfArrayGrade)
-            
+            // change the value of average by pining the index
+            allOfArrayGrade[currrentemesterNumber-1] = average            
+
             rightAverageElement.appendChild(semesterAverage);
         }
+        console.log(allOfArrayGrade)
+
         rightAverageElement.appendChild(document.createTextNode(average));
 
         /********************************* average of average ************************************/
@@ -109,14 +113,9 @@ buttonSemester.addEventListener('click', () => {
         
         let sum2 = 0;
 
-        // Parcourir chaque tableau dans allOfArrayGrade 
+        // go trought the array allOfArrayGrade 
         for (let i = 0; i < allOfArrayGrade.length; i++) {
-        let currentSemesterGrades = allOfArrayGrade[i];
-
-            // Add semester average to make the global average 
-            for (let j = 0; j < currentSemesterGrades.length; j++) {
-                sum2 += currentSemesterGrades[j];
-            }
+            sum2 += allOfArrayGrade[i];
         }
 
 
