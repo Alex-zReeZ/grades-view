@@ -10,7 +10,7 @@ let semesterNumber = 1;
 /******************************add a semester **********************************/
 buttonSemester.addEventListener('click', () => {
     let allGrades = [];
-    let allOfAverage = 0;
+    let allOfAverage = null;
     let currrentemesterNumber = semesterNumber
     allOfArrayGrade.push(0);
 
@@ -99,12 +99,11 @@ tout_les_semestres = [4,3]
                 semesterAverage = orangeSVG.cloneNode(true);
             }
 
-            // change the value of average by pining the index
+            // change the value of average by modifying by the index
             allOfArrayGrade[currrentemesterNumber-1] = average            
 
             rightAverageElement.appendChild(semesterAverage);
         }
-        console.log(allOfArrayGrade)
 
         rightAverageElement.appendChild(document.createTextNode(average));
 
@@ -138,6 +137,16 @@ tout_les_semestres = [4,3]
             averageOfAverage.appendChild(average4);
         }
         averageOfAverage.appendChild(document.createTextNode(average3));
+
+        // show average on the right in dash board
+
+        function rightSideMathsAverage() {
+            let rightSideMathsAverage = document.querySelector('#rightSideMathsAverage')
+            rightSideMathsAverage.innerHTML = ''
+            rightSideMathsAverage.appendChild(document.createTextNode(average3))
+        }
+        rightSideMathsAverage()
+
     });
 
 
@@ -168,6 +177,9 @@ tout_les_semestres = [4,3]
         borderButtonColor.classList.remove("ring-blue-300")
         borderButtonColor.classList.add("ring-gray-300")
     });
+
+    
+    
 
 
 });
