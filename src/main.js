@@ -31,11 +31,7 @@ buttonSemester.addEventListener('click', () => {
         //remove button if 8 semester
         buttonSemester.remove();
     }
-/* 
-tout_les_semestres = [4,0]
-tout_les_semestres[numero_de_semestre-1] = 3
-tout_les_semestres = [4,3]
- */
+
     /*****************************add a grades to the semester**********************/
     const button = Semester.querySelector('button');
     const inputValue = Semester.querySelector('input')
@@ -105,6 +101,7 @@ tout_les_semestres = [4,3]
             rightAverageElement.appendChild(semesterAverage);
         }
 
+        
         rightAverageElement.appendChild(document.createTextNode(average));
 
         /********************************* average of average ************************************/
@@ -177,10 +174,5 @@ tout_les_semestres = [4,3]
         borderButtonColor.classList.remove("ring-blue-300")
         borderButtonColor.classList.add("ring-gray-300")
     });
-
-    
-    
-
-
 });
 
